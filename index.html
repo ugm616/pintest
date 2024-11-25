@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Secure Access System</h1>
+        <input type="password" id="pinInput" maxlength="12" placeholder="Enter 12-digit PIN">
+        <br>
+        <button onclick="login()">Access System</button>
+        <p id="error" class="error">Invalid PIN</p>
+    </div>
+    <script src="js/pins.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        function login() {
+            const pin = document.getElementById('pinInput').value;
+            console.log("Login attempt with PIN length:", pin.length);
+            
+            if (pin.length !== 12) {
+                console.log("PIN length invalid");
+                document.getElementById('error').style.display = 'block';
+                return;
+            }
+            
+            if (validatePin(pin)) {
+                console.log("Login successful, redirecting...");
+                window.location.href = 'pages/main/';
+            } else {
+                console.log("Login failed");
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
